@@ -25,7 +25,7 @@ const Cart = ({navigation}) => {
   
     console.log(totalPrice);
     return (
-      <>
+      <View style={styles.container}>
       {isitems?(
         <ScrollView>
         <View>
@@ -61,7 +61,7 @@ const Cart = ({navigation}) => {
         
         )
       }
-      </>
+      </View>
        
     );
 }
@@ -81,6 +81,10 @@ const styles = StyleSheet.create({
     color: "#000",
     fontSize: 16,
     fontWeight: "bold",
+  },
+  container: {
+    margin: 20,
+    marginTop: 50,
   }
 })
 

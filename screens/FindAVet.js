@@ -4,59 +4,43 @@ import VetHeader from "../components/VetHeader";
 import VetCard from "../components/VetCard";
 
 const FindAVet = ({ navigation }) => {
-  const vetdata = [
+  const vetData = [
     {
       id: 1,
       image: require("../assets/Jojo.png"),
       name: "Dog And Cat Care Home",
+      location: "Tundla",
       rating: 4.5,
       phone: "1234567890",
-      location: "Tundla",
-      Latitude:27.221196773014306,
-      Longitude:78.23845138249521,
-      adress :" Dog And Cat Care Home,City Centre Station Road Tundla, Tundla, Uttar Pradesh 283204"
+      latitude: 27.219239673235624,
+      longitude: 78.23724561660393,
     },
     {
       id: 2,
       image: require("../assets/Jojo.png"),
-      name: "Governement Hospital for Animal",
-      rating: 4,
-      phone: "07599462351",
-      location: "Tundla",
-      Latitude:27.22573963340386,
-      Longitude:78.24567865118497,
-      adress:"पशु चिकित्सालय,Agra, NH-2, AH1, Uttar Pradesh 283202"
-    
-
+      name: "Pet Planet",
+      location: "Ranchi",
+      rating: 4.4,
+      phone: "07321034602",
+      latitude: 23.349855454400014,
+      longitude: 85.3032154287111,
     },
     {
       id: 3,
       image: require("../assets/Jojo.png"),
       name: "JOJO PET SHOP & CLINIC",
+      location: "Tundla",
       rating: 4,
       phone: "1234567890",
-      location: "Tundla",
-      Latitude:27.225997218456587, 
-      Longitude:78.24342559561248,
-      adress:"JOJO PET SHOP & CLINIC,K.p complex firozabad road,tundla, Tundla, Uttar Pradesh 283204"
+      latitude: 27.227374837547586,
+      longitude: 78.24423267614456,
     },
-    {
-      id: 4,
-      image: require("../assets/Jojo.png"),
-      name: "24*7 Pet Clinic.",
-      rating: 4.5,
-      phone: "1234567890",
-      location: "Delhi",
-      Latitude:28.65125859187488, 
-      Longitude:77.11668490769848,
-      adress:"24*7 Pet Clinic.,Z-1B Basement, Block E, Rajouri Garden, New Delhi, Delhi 110077"
-    }
   ];
   return (
     <View>
       <VetHeader />
       <FlatList 
-        data={vetdata}
+        data={vetData}
         keyExtractor={(item) => item.id}
         renderItem={({ item , index }) => (
         <Pressable onPress={() => navigation.navigate("VetDescription", { item })}>

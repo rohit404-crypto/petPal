@@ -50,7 +50,7 @@ const Banner = () => {
       <View>
         <Image
           source={item.image}
-          style={{ width: windowWidth, height: 200 }}
+          style={{ width: windowWidth, height: 150  , resizeMode: 'contain' }}
         />
       </View>
     );
@@ -88,7 +88,7 @@ const Banner = () => {
   };
 
   return (
-    <View style={{ marginTop: 30 }}>
+    <View style={{ marginTop: 0 }}>
       <FlatList
         data={imageData}
         horizontal={true}
@@ -103,7 +103,7 @@ const Banner = () => {
         style={{
           flexDirection: "row",
           justifyContent: "center",
-          marginTop: 10,
+          marginTop: 0,
         }}
       >
         {renderDotIndicator()}

@@ -35,8 +35,8 @@ const styles = StyleSheet.create({
     borderColor: "#ccc",
     borderRadius: 20,
     overflow: "hidden",
-    margin: 2,
-    marginLeft: 10,
+    margin: '2%',
+    marginLeft: '3%',
     
     width: 180,
     backgroundColor: "#F3F4F6",

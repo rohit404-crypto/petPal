@@ -5,9 +5,9 @@ import open, { createOpenLink } from 'react-native-open-maps';
 
 import openMap from 'react-native-open-maps'
 
-const VetCard = ({ image, name, rating, phone, location, Latitude, Longitude, address }) => {
+const VetCard = ({ image, name, rating, phone, location, Latitude, Longitude }) => {
     console.log('Longitude:', Longitude);
-
+  
     const place = {
       latitude: Latitude,
       longitude: Longitude,
@@ -82,6 +82,7 @@ const styles = StyleSheet.create({
     height: '100%',
     objectFit: 'fill',
     borderRadius: 10,
+    resizeMode: 'contain',
   },
   productName: {
     fontSize: 13,

@@ -1,141 +1,121 @@
+import React, { useState, useContext } from "react";
+import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
+import CartContext from "../CartContext";
+import { Icon} from '@rneui/themed'
 
-import React, { useState,useContext } from 'react';
-import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
-import CartContext from '../CartContext';
+const Cartcard = ({ id, image, name, price, ratings, quantity }) => {
+  const { updateCartItemQuantity, removeFromCart } = useContext(CartContext);
 
-import Icon from 'react-native-vector-icons/Ionicons';
- const Cartcard = ({ id,image, name, price, ratings, quantity }) => {
-
-   const {updateCartItemQuantity,removeFromCart } =useContext(CartContext)
-
-    const minus=()=>{
-        if(quantity > 1){
-            updateCartItemQuantity(id,quantity - 1)
-        }
+  const minus = () => {
+    if (quantity > 1) {
+      updateCartItemQuantity(id, quantity - 1);
     }
-   
+  };
+
   return (
     <View style={styles.productCard}>
-      <Image source={{uri:image}} style={styles.productImage} />
-      <View style={styles.horizontalRule} />
-      <View style={styles.productDetails}>
-        <Text style={styles.productName}>{name.substring(0, 10)}</Text>
-        <View style={styles.prat}>
+      <Image source={{ uri: image }} style={styles.productImage} />
+
+      <View></View>
+      <View style={styles.con}>
+        <Text style={styles.productName}>{name}</Text>
+
+        <View style={styles.productDetails}>
           <Text style={styles.productPrice}>₹ {price}</Text>
-          <View style={styles.productRatings}>
-            <View style={styles.star}>
-              <Text>Ratings :</Text>
-              <Text style={styles.ratsta}>{ratings}</Text>
-            </View>
+          <View style={styles.star}>
+            <Text>Ratings :{ratings} <Icon type="antdesign" name="star" size={13}
+              color={"orange"} 
+
+            /></Text>
           </View>
         </View>
+
+        <View style={styles.quantity}>
+          <Text
+            style={styles.add}
+            onPress={() => {
+              updateCartItemQuantity(id, quantity + 1);
+            }}
+          >
+            +
+          </Text>
+          <Text style={styles.buttonText}>{quantity} </Text>
+          <Text style={styles.min} onPress={minus}>
+            -
+          </Text>
+        </View>
+
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => removeFromCart(id)}
+        >
+          <Text style={styles.buttontext}>remove</Text>
+        </TouchableOpacity>
       </View>
-     <View style={styles.quantity}>
-     <Text style={styles.add} onPress={()=>{updateCartItemQuantity(id,quantity + 1)}}>+</Text>
-     <Text style={styles.buttonText} >{quantity} </Text>
-     <Text style={styles.min} onPress={minus}>-</Text>
-   
-     </View>
-        
-     <TouchableOpacity style={styles.button} onPress={()=>removeFromCart(id)}>
-        <Text>remove</Text>
-     </TouchableOpacity>
     </View>
-    
   );
 };
 
-
 const styles = StyleSheet.create({
   productCard: {
-    borderWidth: 1,
-    borderColor: "#ccc",
-    borderRadius: 20,
-    overflow: "hidden",
-    margin: 16,
-    width: '70%',
-    backgroundColor: "#F3F4F6",
-    height: 270,
-    alignItems:"center"
+    width: "100%",
+    backgroundColor: "lightgrey",
+    flexDirection: "row",
+    marginTop: 10,
+    height: 150,
   },
   productImage: {
-    resizeMode: "contain",
-    width: "100%",
-    height: 100,
-    marginTop: 10,
-  },
-  productDetails: {
-    padding: 3,
+    width: "40%",
   },
   productName: {
-    fontSize: 20,
-    marginBottom: 8,
-    fontWeight: "600",
     textAlign: "center",
-  },
-  productPrice: {
-    fontSize: 14,
-    color: "#007bff",
-  },
-  productRatings: {
-    flexDirection: "row",
-    color: "#f8d615",
-  },
-  star: {
-    fontSize: 12,
-    marginRight: 4,
-    textAlign: "center",
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  quantity: {
-    flexDirection:"row",
-    justifyContent:"space-around",
-    width:"50%"
-    
-  },
-  buttonText: {
-    color: "#000",
-    fontSize: 17,
+    fontSize: 18,
     fontWeight: "bold",
   },
-  min:{
-    // backgroundColor:"#000",
-//   color:"white",
-  width:20,
-  height:20,
-  borderRadius:20,
-  textAlign:"center",
-  borderWidth:1,
-  
-},
-  add:{
-    // backgroundColor:"#000",
-//   color:"white",
-  width:20,
-  height:20,
-  borderRadius:20,
-  textAlign:"center",
-  borderWidth:1,
-  
-},
-  prat: {
+  productDetails: {
     flexDirection: "row",
-    justifyContent: "space-between",
+    justifyContent: "space-around",
   },
-  horizontalRule: {
-    borderBottomColor: "#252525",
-    opacity: 0.2,
-    borderBottomWidth: 1,
-    marginVertical: 2,
+
+  quantity: {
+    flexDirection: "row",
+    justifyContent: "center",
+    columnGap: 10,
   },
-  button:{
-    marginTop:10,
-    padding:5,
-    backgroundColor:"red",
-    borderRadius:10
-  }
+  add: {
+    borderWidth: 1,
+    borderColor: "black",
+    textAlign: "center",
+    height: 20,
+    width: 20,
+    borderRadius: 20,
+  },
+  min: {
+    // fontSize: 1,
+    borderWidth: 1,
+    borderColor: "black",
+    // padding: 5,
+    textAlign: "center",
+    height: 20,
+    width: 20,
+    borderRadius: 20,
+  },
+  buttontext: {
+    textAlign: "center",
+  },
+  button: {
+    padding: 10,
+    backgroundColor: "#FF4E47",
+    width: "40%",
+    borderRadius: 10,
+    marginLeft: 60,
+    marginTop: 10,
+    marginBottom: 10,
+  },
+  con: {
+    width: "60%",
+    justifyContent: "space-around",
+  },
 });
 
-export default Cartcard
+export default Cartcard;

@@ -12,7 +12,7 @@ const Categories = ({activeCategory, setActiveCategory}) => {
       horizontal
       style={style.container}
       contentContainerStyle={{
-        height: 60,
+        height: 40,
         flexDirection: "row",
         padding: 0,
         justifyContent: "space-between",
@@ -28,7 +28,7 @@ const Categories = ({activeCategory, setActiveCategory}) => {
         title="All"
         style={style.category}
         containerStyle={{
-          height: 40,
+          height: 30,
           flex: 1,
           justifyContent: "center",
           alignItems: "center",
@@ -41,7 +41,7 @@ const Categories = ({activeCategory, setActiveCategory}) => {
         title="Dogs"
         style={style.category}
         containerStyle={{
-          height: 40,
+          height: 30,
           flex: 1,
           justifyContent: "center",
           alignItems: "center",
@@ -57,7 +57,7 @@ const Categories = ({activeCategory, setActiveCategory}) => {
         title="Cats"
         style={style.category}
         containerStyle={{
-          height: 40,
+          height: 30,
           flex: 1,
           justifyContent: "center",
           alignItems: "center",
@@ -71,7 +71,7 @@ const Categories = ({activeCategory, setActiveCategory}) => {
         title="fish"
         style={style.category}
         containerStyle={{
-          height: 40,
+          height: 30,
           flex: 1,
           justifyContent: "center",
           alignItems: "center",
@@ -84,7 +84,7 @@ const Categories = ({activeCategory, setActiveCategory}) => {
         title="Birds"
         style={style.category}
         containerStyle={{
-          height: 40,
+          height: 30,
           flex: 1,
           justifyContent: "center",
           alignItems: "center",
@@ -98,7 +98,7 @@ const Categories = ({activeCategory, setActiveCategory}) => {
         title="Reptiles"
         style={style.category}
         containerStyle={{
-          height: 40,
+          height: 30,
           flex: 1,
           justifyContent: "center",
           alignItems: "center",
@@ -112,7 +112,7 @@ const Categories = ({activeCategory, setActiveCategory}) => {
         title="Others"
         style={style.category}
         containerStyle={{
-          height: 40,
+          height: 30,
           flex: 1,
           justifyContent: "center",
           alignItems: "center",
