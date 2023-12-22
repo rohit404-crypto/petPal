@@ -19,26 +19,12 @@ import Cart from './screens/Cart';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
-
-const VetDescription = () => (
-  <Stack.Navigator screenOptions={{ headerShown: false }}>
-    <Stack.Screen name="VetDescriptionScreen" component={VetDescriptionScreen} />
-    {/* Add additional screens within the VetDescription stack if needed */}
-  </Stack.Navigator>
-);
-
-const ProductDescription = () => (
-  <Stack.Navigator screenOptions={{ headerShown: false }}>
-  <Stack.Screen name="ProductDescriptionScreen" component={ProductDescriptionScreen} />
-  </Stack.Navigator>
-)
-
 const PetAcessoriesStack = () => (
   <CartProvider>
   <Stack.Navigator
     screenOptions={{ headerShown: false }}>
     <Stack.Screen name="PetAcessories" component={PetAcessories} />
-    <Stack.Screen name="ProductDescription" component={ProductDescription} />
+    <Stack.Screen name="ProductDescription" component={ProductDescriptionScreen} />
     <Stack.Screen name="Cart" component={Cart} /> 
   </Stack.Navigator>
   </CartProvider>
@@ -47,7 +33,7 @@ const FindAVetStack = () => (
   <Stack.Navigator
     screenOptions={{ headerShown: false }}>
     <Stack.Screen name="FindAVet" component={FindAVet} />
-    <Stack.Screen name="VetDescription" component={VetDescription} />
+    <Stack.Screen name="VetDescription" component={VetDescriptionScreen} />
   </Stack.Navigator>
 );
 const AuthNavigator = () => (
