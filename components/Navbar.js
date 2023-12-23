@@ -49,7 +49,7 @@ const Navbar = ({ allProducts , navigation ,}) => {
                 )}
 
             </View>
-            <Icon name="heart" type='octicon' containerStyle={{ left: -6, width: 25, height: 25 }} />
+            <Icon name="heart" type='octicon' containerStyle={{ left: -6, width: 25, height: 25 }}  onPress={() => navigation.navigate('wish')}/>
             <Icon name="shopping-cart" type='material' containerStyle={{ right: -5, width: 25, height: 25 }} onPress={() => navigation.navigate('Cart')} />
         </View>
     )

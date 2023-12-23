@@ -5,6 +5,7 @@ const CartContext=createContext();
 
 export function CartProvider({children}){
   const [items,setItems]=useState([]);
+  const [list,setList]=useState([]);
   
   const addToCart = (item)=>{
     const existingItem=items.find((cartItem)=>cartItem._id===item._id);
@@ -37,11 +38,27 @@ export function CartProvider({children}){
     return items.reduce((acc, item) => acc + item.quantity * item.price, 0);
   };
 
+  const addToWish = (data)=>{
+    //find method will searches through the items of array and  find an item with the same _id as the item being added.
+    const existing = list.find((wishListItem) => wishListItem._id === data._id);
+    if (!existing) {
+      setList([...list, { ...data }]);
+  } 
+  else {
+    removeFromWish(data._id);
+  }
+ 
+  };
+
+  const removeFromWish = (dataId) => {
+    setList((prevItems) => prevItems.filter((data) => data._id !== dataId));
+  };
+
   const removeFromCart = (itemId) => {
     setItems((prevItems) => prevItems.filter((item) => item._id !== itemId));
   };
   return(
-    <CartContext.Provider value={{items,addToCart,updateCartItemQuantity, getTotalPrice,removeFromCart }}>{children}</CartContext.Provider>
+    <CartContext.Provider value={{items,addToCart,updateCartItemQuantity, getTotalPrice,removeFromCart, list,addToWish,removeFromWish }}>{children}</CartContext.Provider>
   )
 }
 

@@ -1,74 +1,75 @@
-import React from 'react';
-import {View, StyleSheet , Text,TouchableOpacity , ScrollView} from 'react-native';
-import { useContext ,useState} from 'react';
-import CartContext from '../CartContext';
-import Cartcard from '../components/Cartcard';
+import React from "react";
+import {
+  View,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  ScrollView,
+} from "react-native";
+import { useContext, useState } from "react";
+import CartContext from "../CartContext";
+import Cartcard from "../components/Cartcard";
 
+const Cart = ({ navigation }) => {
+  // const { items, updateCartItemQuantity } = useContext(CartContext);
+  // const {items,updatecart}=useContext(CartContext);
+  const { items } = useContext(CartContext);
 
+  console.log(items.length);
+  const totalPrice = items.reduce((acc, item) => {
+    return acc + item.quantity * item.price;
+  }, 0);
 
+  const isitems = items.length > 0;
+  console.log(isitems);
 
-
-const Cart = ({navigation}) => {
-   
-    // const { items, updateCartItemQuantity } = useContext(CartContext);
-    // const {items,updatecart}=useContext(CartContext);
-    const { items } = useContext(CartContext);
-    
-    console.log(items.length);
-    const totalPrice = items.reduce((acc, item) => {
-        return acc + item.quantity * item.price;
-
-    }, 0);
-    
-   const isitems = items.length > 0;
-   console.log(isitems);
-  
-    console.log(totalPrice);
-    return (
-      <View style={styles.container}>
-      {isitems?(
+  console.log(totalPrice);
+  return (
+    <View style={styles.container}>
+      {isitems ? (
         <ScrollView>
-        <View>
-        {
-
-        
-        items.map((cart)=>(
-            <Cartcard 
+          <View>
+            {items.map((cart) => (
+              <Cartcard
                 key={cart._id}
-                id ={cart._id}
-            image={cart.imageurl}
-            name={cart.name}
-            ratings={cart.rating}
-            price={cart.price}
-            quantity={cart.quantity}
-            
-          
-            />
-          
-        ))
-
-           
-           }
-           <View><Text>totalPrice: {totalPrice}</Text></View>
-           <TouchableOpacity style={styles.button} >
-        <Text style={styles.buttonText} >Proceed To Buy</Text>
-      </TouchableOpacity>
-        </View>
-        </ScrollView>):(
-          <View style={{height:"100%",justifyContent:"center",alignItems:"center"}}>
-          <Text style={{fontSize:24}}>YOUR CART IS EMPTY</Text>
+                id={cart._id}
+                image={cart.imageurl}
+                name={cart.name}
+                ratings={cart.rating}
+                price={cart.price}
+                quantity={cart.quantity}
+              />
+            ))}
+            <View>
+              <Text>totalPrice: {totalPrice}</Text>
+            </View>
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() => {
+                navigation.navigate("Cart", { screen: "Address" });
+              }}
+            >
+              <Text style={styles.buttonText}>Proceed To Buy</Text>
+            </TouchableOpacity>
           </View>
-        
-        )
-      }
-      </View>
-       
-    );
-}
-
+        </ScrollView>
+      ) : (
+        <View
+          style={{
+            height: "100%",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <Text style={{ fontSize: 24 }}>YOUR CART IS EMPTY</Text>
+        </View>
+      )}
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
-    button: {
+  button: {
     backgroundColor: "#F77A3B",
     padding: 10,
     borderRadius: 30,
@@ -85,7 +86,7 @@ const styles = StyleSheet.create({
   container: {
     margin: 20,
     marginTop: 50,
-  }
-})
+  },
+});
 
 export default Cart;

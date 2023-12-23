@@ -7,19 +7,33 @@ import {
   TouchableOpacity,
   ScrollView,
 } from "react-native";
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import ProductBanner from "../components/ProductBanner";
 import { Icon, Rating, RatingProps } from "@rneui/themed";
 import Accordion from "../components/Accordion";
+import CartContext from "../CartContext";
 
-const ProductDescriptionScreen = () => {
+
+const ProductDescriptionScreen = ({route , navigation }) => {
+  
   const windowWidth = Dimensions.get("window").width;
+ 
+  const [data, setdata] = useState();
+  const {addToCart}=useContext(CartContext);
+  const { addToWish, removeFromWish, items , list } = useContext(CartContext);
+  useEffect(() => {
+    const param = route.params;
+
+    setdata(param);
+  
+  }, []);
+  console.log(data)
   return (
     <View style={{ backgroundColor: "white", flex: 1 }}>
-      <Navbar style={{ zindex: 1 }} />
+      <Navbar style={{ zindex: 1 }}  navigation={navigation}/>
       <ScrollView>
-        <ProductBanner />
+        <ProductBanner  data={data} imageurl={data?.imageurl}/>
         <Text
           style={{
             marginTop: 10,
@@ -28,13 +42,20 @@ const ProductDescriptionScreen = () => {
             paddingLeft: 20,
           }}
         >
-          Purepet Meat and Rice Adult Dry Dog Food, 10kg
+          {data?.name}
         </Text>
-        <View style={{ flexDirection: "row", marginLeft: 20 , alignItems: "center", marginTop: 10}}>
-        <Text>4.5</Text>
-        <Icon name="star" type="material" color='yellowgreen' size={20} />
+        <View
+          style={{
+            flexDirection: "row",
+            marginLeft: 20,
+            alignItems: "center",
+            marginTop: 10,
+          }}
+        >
+          <Text>4.5</Text>
+          <Icon name="star" type="material" color="yellowgreen" size={20}  />
         </View>
-       
+
         <View
           style={{
             flexDirection: "row",
@@ -53,9 +74,9 @@ const ProductDescriptionScreen = () => {
               color: "green",
             }}
           >
-            ₹ 1,000
+           ₹{data?.price}
           </Text>
-          <TouchableOpacity style={styles.button}>
+          <TouchableOpacity style={styles.button} onPress={() => addToCart(data)}>
             <Text style={styles.buttonText}> Add To Cart </Text>
           </TouchableOpacity>
         </View>
@@ -126,8 +147,8 @@ const ProductDescriptionScreen = () => {
           {/* <Icon name ="sync-off" type="material-community" color="black" size={40} />
          <Icon name ="hand-coin-outline" type="material-community" color="black" size={40} /> */}
         </View>
-        <Accordion title="Description" />
-        <Accordion title="Reviews" />
+        <Accordion title="Description"  content={data?.desc}/>
+        <Accordion title="Reviews"  content={data?.desc}/>
       </ScrollView>
     </View>
   );

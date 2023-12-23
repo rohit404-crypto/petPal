@@ -1,14 +1,16 @@
 import { View, Image, Dimensions } from "react-native";
-import React from "react";
+import React, { useContext, useState } from "react";
 import { Icon } from "react-native-elements";
-
-const ProductBanner = () => {
+import CartContext from "../CartContext";
+const ProductBanner = ({ imageurl, data }) => {
   const windowWidth = Dimensions.get("window").width;
+  const { addToWish, removeFromWish, items , list } = useContext(CartContext);
+  const [active , setActive] = useState(false);
 
   return (
     <View>
       <Image
-        source={require("../assets/ProductBanner.jpg")}
+        source={{uri: imageurl}}
         style={{
           width: windowWidth,
           height: 300,
@@ -22,6 +24,10 @@ const ProductBanner = () => {
       <Icon
         name="heart"
         type="octicon"
+        color={active ? "red" : "black"}
+        onPress={() => {setActive(!active)
+          addToWish(data)
+         }}
         containerStyle={{
           backgroundColor: "transparent",
           borderWidth: 0,

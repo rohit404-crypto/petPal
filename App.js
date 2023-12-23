@@ -16,16 +16,29 @@ import { Icon } from 'react-native-elements';
 import VetDescriptionScreen from './screens/VetDescription';
 import ProductDescriptionScreen from './screens/ProductDescriptionScreen';
 import Cart from './screens/Cart';
+import Wish from './screens/Wishlist';
+import Address from './screens/Address';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
+// const CartStack = () => (
+//   <Stack.Navigator>
+//     <Stack.Screen name="Cart" component={Cart} />
+//     <Stack.Screen name='Address' component={Address}/>
+//   </Stack.Navigator>
+// )
 const PetAcessoriesStack = () => (
   <CartProvider>
   <Stack.Navigator
     screenOptions={{ headerShown: false }}>
     <Stack.Screen name="PetAcessories" component={PetAcessories} />
     <Stack.Screen name="ProductDescription" component={ProductDescriptionScreen} />
-    <Stack.Screen name="Cart" component={Cart} /> 
+    {/* <Stack.Screen name="CartStack" component={CartStack} />  */}
+    <Stack.Screen name = "wish" component={Wish}/>
+    <Stack.Screen name="Cart" component={Cart} />
+    <Stack.Screen name='Address' component={Address}/>
+
+    
   </Stack.Navigator>
   </CartProvider>
 )

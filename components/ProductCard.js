@@ -2,9 +2,16 @@ import { Icon } from "@rneui/themed";
 import React from "react";
 import { View, Text, Image, StyleSheet, TouchableOpacity, ScrollView } from "react-native";
 
-const ProductCard = ({ imageurl, name, price, ratings, add ,  handleCart  }) => {
+const ProductCard = ({ imageurl, name, price, ratings, add ,  handleCart , actionButton  }) => {
+  const { icon, onPress } = actionButton || {};
+
   return (
     <View style={styles.productCard} >
+      <TouchableOpacity onPress={onPress} style={{height:30,width:30,borderRadius:30,position:"absolute",top:5,right:'2%',zIndex:1}}>
+      <View style={styles.iconContainer}>
+       {icon}
+      </View>
+    </TouchableOpacity>
       <Image source={{uri:imageurl}} style={styles.productImage} />
       <View style={styles.productDetails}>
         <Text style={styles.productName}>{name.substring(0, 50)}...</Text>
@@ -97,6 +104,12 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
   },
+  iconContainer:{
+    position:"absolute",
+    right:"20%",
+    top:8,
+    
+  }
   
 });
 

@@ -1,5 +1,5 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { View, Text, StyleSheet, ScrollView, FlatList, Pressable, Dimensions } from 'react-native';
+import React, { useContext, useEffect, useState,  } from 'react';
+import { View, Text, StyleSheet, ScrollView, FlatList, Pressable, Dimensions, TouchableOpacity } from 'react-native';
 import { Icon } from '@rneui/themed';
 import Navbar from '../components/Navbar';
 import Banner from '../components/Banner';
@@ -12,11 +12,12 @@ const PetAccessories = ({ navigation }) => {
   const windowHeight = Dimensions.get('window').height;
   const [allProducts, setAllProducts] = useState([]);
   const [activeCategory, setActiveCategory] = useState('All');
-  const API = activeCategory === 'Dogs' ? 'dog' : (activeCategory === 'Cats' ? 'cat' : 'fish');
+  const API = activeCategory === 'Dogs' ? 'dog' : (activeCategory === 'Cats' ? 'cat' : (activeCategory === 'fish' ? 'fish' : 'pet'));
   const {addToCart}=useContext(CartContext);
- 
-  
+  const { addToWish, removeFromWish, items , list } = useContext(CartContext);
+  const [wishlistStatus, setWishlistStatus] = useState({});
   // console.log(data);
+  
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -30,14 +31,46 @@ const PetAccessories = ({ navigation }) => {
 
     fetchData();
   }, [API]);
+  const navigateToProductDescription = (product) => {
+    
+    navigation.navigate('ProductDescription', product);
 
-  const navigateToProductDescription = (item) => {
-    navigation.navigate('ProductDescription', { item });
   };
+  const toggleWishlist = (itemId) => {
+    setWishlistStatus((prevStatus) => {
+      const updatedStatus = { ...prevStatus };
+      updatedStatus[itemId] = !updatedStatus[itemId];
+      return updatedStatus;
+    });
+
+    const item = allProducts.find((item) => item._id === itemId);
+
+    if (wishlistStatus[itemId]) {
+      removeFromWish(itemId);
+    } else {
+      addToWish(item);
+    }
+  };
+  
+  useEffect(() => {
+    setWishlistStatus((prevStatus) => {
+      const updatedStatus = { ...prevStatus };
+
+      // Clear the status for items that are not in the wishlist
+      Object.keys(updatedStatus).forEach((itemId) => {
+        if (!list.find((item) => item._id === itemId)) {
+          delete updatedStatus[itemId];
+        }
+      });
+
+      return updatedStatus;
+    });
+  }, [list]);
+
  
   return (
     <View style={styles.container}>
-      <Navbar allProducts={allProducts}  navigation={navigation} />
+      <Navbar allProducts={allProducts}   navigation={navigation}/>
       
       <Banner />
       <Categories style={styles.Categories} activeCategory={activeCategory} setActiveCategory={setActiveCategory} />
@@ -49,7 +82,18 @@ const PetAccessories = ({ navigation }) => {
         numColumns={2}
         renderItem={({ item, index }) => (
           <Pressable onPress={() => navigateToProductDescription(item)}>
-            <ProductCard key={index} imageurl={item.imageurl} name={item.name} price={item.price} ratings={item.rating} add={item.add}  handleCart={() => addToCart(item)}  />
+            <ProductCard key={index} imageurl={item.imageurl} name={item.name} price={item.price} ratings={item.rating} add={item.add}  handleCart={() => addToCart(item)} actionButton={{
+                icon: (
+                  <TouchableOpacity onPress={() => toggleWishlist(item._id)}>
+                    <Icon
+                      name={wishlistStatus[item._id] ? "heart" : "hearto"}
+                      type="antdesign"
+                      color={wishlistStatus[item._id] ? "red" : "black"}
+                      size={20}
+                    />
+                  </TouchableOpacity>
+                ),
+              }}/>
           </Pressable>
         )}
         contentContainerStyle={{ height: windowHeight, marginTop: 5 }}
@@ -71,7 +115,7 @@ const PetAccessories = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 2,
     backgroundColor: 'white',
   },
   Categories: {

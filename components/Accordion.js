@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import { Icon } from "react-native-elements";
 
-const Accordion = ({ title }) => {
+const Accordion = ({ title, content }) => {
   const windowWidth = Dimensions.get("window").width;
   const windowHeight = Dimensions.get("window").height;
   const [isExpanded, setIsExpanded] = useState(false);
@@ -48,13 +48,7 @@ const Accordion = ({ title }) => {
           keyboardShouldPersistTaps="handled"
         >
           <Text selectable style={{ marginLeft: 20, marginTop: 10 }}>
-            Purepet Meat and Rice Adult Dog Food is a complete and balanced diet
-            which stimulates your pet’s regular activities keeping them happy
-            and active. It is blended with essential nutrients that help
-            maintain an ideal weight, providing all the health benefits. Purepet
-            is a high-quality food, approved by Veterinarians which is suitable
-            for all the breeds. Key Features: A balanced Adult Dog Food
-            maintains an ideal weight of your pet keeping them active and agile.
+           {content}
           </Text>
         </ScrollView>
       )}
