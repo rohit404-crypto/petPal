@@ -9,12 +9,17 @@ import {
 import { useContext, useState } from "react";
 import CartContext from "../CartContext";
 import Cartcard from "../components/Cartcard";
+import{RAZORPAY_KEY_ID, RAZORPAY_KEY_SECRET} from '@env';
+import RazorpayCheckout from 'react-native-razorpay';
 
 const Cart = ({ navigation }) => {
   // const { items, updateCartItemQuantity } = useContext(CartContext);
   // const {items,updatecart}=useContext(CartContext);
   const { items } = useContext(CartContext);
-
+  console.log(RAZORPAY_KEY_ID);
+  const razorPayKeyID = 'rzp_test_Z9f4lPCbOQTDEi';
+  const razorPayKeySecret = 'NTG8XPtmVgdmAdmWvNJZy4T1';
+  
   console.log(items.length);
   const totalPrice = items.reduce((acc, item) => {
     return acc + item.quantity * item.price;
@@ -22,8 +27,32 @@ const Cart = ({ navigation }) => {
 
   const isitems = items.length > 0;
   console.log(isitems);
-
+ 
   console.log(totalPrice);
+  const hadlePayment = () => {
+    var options = {
+      description: 'Credits towards consultation',
+      image: 'https://i.imgur.com/3g7nmJC.jpg',
+      currency: 'INR',
+      key: razorPayKeyID,
+      amount: totalPrice*100,
+      name: 'User',
+      order_id: 'gfdgfdfd',//Replace this with an order_id created using Orders API.
+      prefill: {
+        email: 'xyz@gmail.com',
+        contact: '9999999999',
+        name: 'test'
+      },
+      theme: {color: '#53a20e'}
+    }
+    RazorpayCheckout.open(options).then((data) => {
+      // handle success
+      alert(`Success: ${data.razorpay_payment_id}`);
+    }).catch((error) => {
+      // handle failure
+      alert(`Error: ${error.code} | ${error.description}`);
+    });
+   }
   return (
     <View style={styles.container}>
       {isitems ? (
@@ -45,12 +74,11 @@ const Cart = ({ navigation }) => {
             </View>
             <TouchableOpacity
               style={styles.button}
-              onPress={() => {
-                navigation.navigate("Cart", { screen: "Address" });
-              }}
+              onPress={hadlePayment}
             >
               <Text style={styles.buttonText}>Proceed To Buy</Text>
             </TouchableOpacity>
+
           </View>
         </ScrollView>
       ) : (
