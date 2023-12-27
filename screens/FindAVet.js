@@ -44,7 +44,7 @@ const FindAVet = ({ navigation }) => {
         keyExtractor={(item) => item.id}
         renderItem={({ item , index }) => (
         <Pressable onPress={() => navigation.navigate("VetDescription", { item })}>
-          <VetCard  key = {index} image={item.image} name={item.name} rating={item.rating} phone={item.phone} location={item.location} Latitude={item.Latitude} Longitude={item.Longitude}  adress={item.adress}/>
+          <VetCard  key = {index} image={item.image} name={item.name} rating={item.rating} phone={item.phone} location={item.location} Latitude={item.latitude} Longitude={item.longitude}  adress={item.adress}/>
         </Pressable>
         )}
         showsVerticalScrollIndicator={false}

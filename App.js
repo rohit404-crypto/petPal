@@ -18,6 +18,7 @@ import ProductDescriptionScreen from './screens/ProductDescriptionScreen';
 import Cart from './screens/Cart';
 import Wish from './screens/Wishlist';
 import Address from './screens/Address';
+import GroomingDescription from './screens/GroomingDescription';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -49,6 +50,14 @@ const FindAVetStack = () => (
     <Stack.Screen name="VetDescription" component={VetDescriptionScreen} />
   </Stack.Navigator>
 );
+
+const GroomingStack = () => (
+  <Stack.Navigator
+    screenOptions={{ headerShown: false }}>
+    <Stack.Screen name="GroomingScreen" component={Grooming} />
+    <Stack.Screen name="GroomingDescription" component={GroomingDescription} />
+  </Stack.Navigator>
+)
 const AuthNavigator = () => (
   <Stack.Navigator initialRouteName="splash">
     <Stack.Screen name="login" component={Login} />
@@ -87,7 +96,7 @@ const AppNavigator = () => (
   />
   <Tab.Screen
     name="Grooming"
-    component={Grooming}
+    component={GroomingStack}
     options={{
       tabBarIcon: ({ color, size }) => (
         <Icon name="scissors" type='font-awesome' color={color} size={size} />

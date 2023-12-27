@@ -3,7 +3,7 @@ import React from 'react'
 import VetHeader from '../components/VetHeader'
 import VetCard from '../components/VetCard';
 
-const Grooming = () => {
+const Grooming = ({navigation}) => {
   const petServiceData = [
     {
       id: 1,
@@ -54,8 +54,8 @@ const Grooming = () => {
         data={petServiceData}
         keyExtractor={(item) => item.id}
         renderItem={({ item , index }) => (
-        <Pressable onPress={() => navigation.navigate("VetDescription", { item })}>
-          <VetCard  key = {index} image={item.image} name={item.name} rating={item.rating} phone={item.phone} location={item.location} Latitude={item.Latitude} Longitude={item.Longitude}/>
+        <Pressable onPress={() => navigation.navigate("GroomingDescription", { item })}>
+          <VetCard  key = {index} image={item.image} name={item.name} rating={item.rating} phone={item.phone} location={item.location} Latitude={item.latitude} Longitude={item.longitude}/>
         </Pressable>
         )}
         showsVerticalScrollIndicator={false}

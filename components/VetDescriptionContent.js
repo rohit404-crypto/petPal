@@ -6,12 +6,39 @@ import {
   StyleSheet,
   ScrollView,
   FlatList,
+  Linking
 } from "react-native";
 import React from "react";
 import { Icon } from "@rneui/themed";
 import { Divider } from "react-native-elements";
 import { Avatar } from "@rneui/themed";
-const VetDescriptionContent = ({ images }) => {
+import open,{ createOpenLink } from 'react-native-open-maps';
+const VetDescriptionContent = ({ images , item }) => {
+  const place = {
+    latitude: item.latitude,
+    longitude: item.longitude,
+  };
+
+  const handleLocation = createOpenLink({
+    query: `${item.name}, ${item.location}`,
+    ...place,
+    zoom: 16,
+  });
+  const handleCallPress = () => {
+    const phoneUrl = `tel:${item.phone}`;
+
+    Linking.canOpenURL(phoneUrl)
+      .then((supported) => {
+        if (supported) {
+          Linking.openURL(phoneUrl);
+        } else {
+          console.error(`Phone number ${item.phone} is not supported`);
+        }
+      })
+      .catch((error) => {
+        console.error('An error occurred while opening the phone app:', error);
+      });
+  };
   return (
     <>
       <View style={styles.container}>
@@ -21,12 +48,12 @@ const VetDescriptionContent = ({ images }) => {
         />
         <View>
           <Text style={{ fontWeight: "bold", fontSize: 20 }}>
-            Dog And Cat Care Home
+            {item.name}
           </Text>
-          <TouchableOpacity style={styles.location}>
+          <TouchableOpacity style={styles.location} onPress={handleLocation}>
             <Text style={{ fontSize: 17, color: "green", fontWeight: "400" }}>
               <Icon name="location" type="entypo" color="green" size={13} />{" "}
-              Tundla
+              {item.location}
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
@@ -38,7 +65,9 @@ const VetDescriptionContent = ({ images }) => {
               backgroundColor: "green",
               borderRadius: 5,
               height: 40,
+              width: 200,
             }}
+            onPress={handleCallPress}
           >
             <Icon
               name="phone"
@@ -56,7 +85,7 @@ const VetDescriptionContent = ({ images }) => {
               }}
             >
               {" "}
-              07321034602
+              {item.phone}
             </Text>
           </TouchableOpacity>
         </View>
