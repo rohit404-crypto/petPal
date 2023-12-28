@@ -1,5 +1,5 @@
-import React, { useContext, useEffect, useState,  } from 'react';
-import { View, Text, StyleSheet, ScrollView, FlatList, Pressable, Dimensions, TouchableOpacity } from 'react-native';
+import React, { useContext, useEffect, useState,   } from 'react';
+import { View, Text, StyleSheet, ScrollView, FlatList, Pressable, Dimensions, TouchableOpacity, SafeAreaView } from 'react-native';
 import { Icon } from '@rneui/themed';
 import Navbar from '../components/Navbar';
 import Banner from '../components/Banner';
@@ -69,7 +69,7 @@ const PetAccessories = ({ navigation }) => {
 
  
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={{flex: 1,backgroundColor: 'white',}}>
       <Navbar allProducts={allProducts}   navigation={navigation}/>
       
       <Banner />
@@ -96,10 +96,10 @@ const PetAccessories = ({ navigation }) => {
               }}/>
           </Pressable>
         )}
-        contentContainerStyle={{ height: windowHeight, marginTop: 5 }}
+        contentContainerStyle={{ paddingBottom: 100 }}
       />
 
-      <View style={styles.sortButtonsContainer}>
+      {/* <View style={styles.sortButtonsContainer}>
         <Pressable style={styles.sortButton}>
           <Icon name="filter" type="antdesign" color="black" size={20} containerStyle={{ zIndex: 1 }} />
           <Text style={styles.buttonText}>Filter</Text>
@@ -108,14 +108,14 @@ const PetAccessories = ({ navigation }) => {
           <Icon name="swap-vert" type="material" color="black" size={25} containerStyle={{ zIndex: 1 }} />
           <Text style={styles.buttonText}>Sort</Text>
         </Pressable>
-      </View>
-    </View>
+      </View> */}
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 2,
+    flex: 1,
     backgroundColor: 'white',
   },
   Categories: {

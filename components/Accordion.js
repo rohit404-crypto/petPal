@@ -44,7 +44,7 @@ const Accordion = ({ title, content }) => {
       {/* Accordion Content */}
       {isExpanded && (
         <ScrollView
-          style={{ flex: 1, height: windowHeight-570 }} // Adjust the height as needed
+          style={{ flex: 1,paddingBottom: 100 }} // Adjust the height as needed
           keyboardShouldPersistTaps="handled"
         >
           <Text selectable style={{ marginLeft: 20, marginTop: 10 }}>

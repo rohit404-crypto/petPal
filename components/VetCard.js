@@ -15,7 +15,6 @@ const VetCard = ({ image, name, rating, phone, location, Latitude, Longitude }) 
   
     const handleLocation = createOpenLink({
       query: `${name}, ${location}`,
-      ...place,
       zoom: 16,
     });
 

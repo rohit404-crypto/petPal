@@ -21,7 +21,6 @@ const VetDescriptionContent = ({ images , item }) => {
 
   const handleLocation = createOpenLink({
     query: `${item.name}, ${item.location}`,
-    ...place,
     zoom: 16,
   });
   const handleCallPress = () => {
