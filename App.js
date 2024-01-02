@@ -19,6 +19,10 @@ import Cart from './screens/Cart';
 import Wish from './screens/Wishlist';
 import Address from './screens/Address';
 import GroomingDescription from './screens/GroomingDescription';
+import AdoptPage from './screens/AdoptPage';
+import AdoptDescription from './screens/AdoptDescription';
+import AccountSettings from './screens/AccountSettings';
+import InviteFriends from './screens/InviteFriends';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -58,6 +62,24 @@ const GroomingStack = () => (
     <Stack.Screen name="GroomingDescription" component={GroomingDescription} />
   </Stack.Navigator>
 )
+const AdoptStack = () => (
+  <Stack.Navigator 
+  screenOptions={{ headerShown: false }}>
+    <Stack.Screen name="AdoptPage" component={AdoptPage} />
+    <Stack.Screen name = "adoptDescription" component={AdoptDescription}/>
+  </Stack.Navigator>
+)
+const AccountStack = ()=>(
+  <Stack.Navigator
+  screenOptions={{ headerShown: false }}>
+    <Stack.Screen name='Accountpage' component={Account}/>
+    <Stack.Screen name='AccountSettings' component={AccountSettings}/>
+    <Stack.Screen name = 'Invite' component={InviteFriends}/>
+  </Stack.Navigator>
+)
+
+
+
 const AuthNavigator = () => (
   <Stack.Navigator initialRouteName="splash">
     <Stack.Screen name="login" component={Login} />
@@ -105,13 +127,22 @@ const AppNavigator = () => (
   />
   <Tab.Screen
     name="Account"
-    component={Account}
+    component={AccountStack}
     options={{
       tabBarIcon: ({ color, size }) => (
         <Icon name="user" type='font-awesome' color={color} size={size} />
       ),
     }}
   />
+  <Tab.Screen
+  name='Adopt'
+  component={AdoptStack}
+  options={{
+    tabBarIcon: ({ color, size }) => (
+      <Icon name="heart" type='font-awesome' color={color} size={size} />
+    ),
+  }}
+/>
 </Tab.Navigator>
 );
 
