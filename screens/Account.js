@@ -5,7 +5,7 @@ import AccountBanner from '../components/AccountBanner'
 import AccountContent from '../components/AccountContent'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const Account = () => {
+const Account = ({navigation}) => {
   const [userData,setUserData] = useState({
     email: "",
     petname: "",
@@ -33,7 +33,8 @@ const Account = () => {
     <View>
      <AccountHeader  />
      <AccountBanner userData={userData} />
-     <AccountContent />
+     <AccountContent navigation={navigation} userData={userData} />
+     
     </View>
   )
 }

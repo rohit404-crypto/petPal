@@ -16,6 +16,7 @@ const PetAccessories = ({ navigation }) => {
   const {addToCart}=useContext(CartContext);
   const { addToWish, removeFromWish, items , list } = useContext(CartContext);
   const [wishlistStatus, setWishlistStatus] = useState({});
+  const [searchTerm,setSearchTerm] = useState("")
   // console.log(data);
   
   useEffect(() => {
@@ -31,6 +32,14 @@ const PetAccessories = ({ navigation }) => {
 
     fetchData();
   }, [API]);
+  const handleSearch = async () => {
+    try {
+      const response = await fetch(`http://${ip}:3000/api/searchproducts?name=${searchTerm}`);
+      const data = await response.json();
+      setAllProducts(data);
+    } catch (error) {
+      console.error('Error fetching data:', error);}
+};
   const navigateToProductDescription = (product) => {
     
     navigation.navigate('ProductDescription', product);
@@ -70,7 +79,7 @@ const PetAccessories = ({ navigation }) => {
  
   return (
     <SafeAreaView style={{flex: 1,backgroundColor: 'white',}}>
-      <Navbar allProducts={allProducts}   navigation={navigation}/>
+      <Navbar allProducts={allProducts}   navigation={navigation} setSearch={setSearchTerm} handleSearch={handleSearch}/>
       
       <Banner />
       <Categories style={styles.Categories} activeCategory={activeCategory} setActiveCategory={setActiveCategory} />

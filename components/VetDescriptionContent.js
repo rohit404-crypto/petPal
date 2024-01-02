@@ -8,17 +8,21 @@ import {
   FlatList,
   Linking
 } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import { Icon } from "@rneui/themed";
 import { Divider } from "react-native-elements";
 import { Avatar } from "@rneui/themed";
 import open,{ createOpenLink } from 'react-native-open-maps';
 const VetDescriptionContent = ({ images , item }) => {
+  const [treatmentData, setTreatmentData] = useState(item.treatment);
+  console.log('dtatat',treatmentData)
+  console.log('item',item)
   const place = {
     latitude: item.latitude,
     longitude: item.longitude,
   };
-
+ 
+  console.log(item.treatment)
   const handleLocation = createOpenLink({
     query: `${item.name}, ${item.location}`,
     zoom: 16,
@@ -116,34 +120,17 @@ const VetDescriptionContent = ({ images , item }) => {
       <View style={{ marginLeft: 20, marginTop: 20 }}>
         <Text style={{ fontWeight: "bold", fontSize: 20 }}>Treatments</Text>
         <Divider width={2} style={{ marginRight: 10 }} />
-        <View style={{ marginTop: 20, flexDirection: "row", gap: 10 }}>
+        <FlatList
+          data={treatmentData}
+          key={(item) => item.toString()}
+          renderItem={({ item }) => (
+            <View style={{ marginTop: 20, flexDirection: "row", gap: 10 }}>
           <Icon name="checksquare" type="antdesign" color="green" size={20} />
-          <Text>First Aid</Text>
+          <Text></Text>
         </View>
-        <View style={{ marginTop: 10, flexDirection: "row", gap: 10 }}>
-          <Icon name="checksquare" type="antdesign" color="green" size={20} />
-          <Text>Treatments Of Birds</Text>
-        </View>
-        <View style={{ marginTop: 10, flexDirection: "row", gap: 10 }}>
-          <Icon name="checksquare" type="antdesign" color="green" size={20} />
-          <Text>Gastroentritis</Text>
-        </View>
-        <View style={{ marginTop: 10, flexDirection: "row", gap: 10 }}>
-          <Icon name="checksquare" type="antdesign" color="green" size={20} />
-          <Text>All Kind of Surgery</Text>
-        </View>
-        <View style={{ marginTop: 10, flexDirection: "row", gap: 10 }}>
-          <Icon name="checksquare" type="antdesign" color="green" size={20} />
-          <Text>Castration Procedure</Text>
-        </View>
-        <View style={{ marginTop: 10, flexDirection: "row", gap: 10 }}>
-          <Icon name="checksquare" type="antdesign" color="green" size={20} />
-          <Text>Cancer Treatment</Text>
-        </View>
-        <View style={{ marginTop: 10, flexDirection: "row", gap: 10 }}>
-          <Icon name="checksquare" type="antdesign" color="green" size={20} />
-          <Text>Fleas and Ticks</Text>
-        </View>
+          )}
+        nestedScrollEnabled
+        />
       </View>
       <View>
         <Text

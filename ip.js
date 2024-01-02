@@ -1,1 +1,1 @@
-export const ip = "192.168.57.104"
+export const ip = "192.168.90.104"
