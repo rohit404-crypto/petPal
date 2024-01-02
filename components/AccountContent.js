@@ -1,11 +1,12 @@
-import { View, Text, StyleSheet, Pressable } from 'react-native'
+import { View, Text, StyleSheet, Pressable, TouchableOpacity} from 'react-native'
 import React, { useContext } from 'react'
 import { Icon } from '@rneui/themed';
 import { Divider } from 'react-native-elements';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Context } from '../context';
-const AccountContent = () => {
+const AccountContent = ({navigation , userData}) => {
   const [isSignedIn ,setisSignedIn] = useContext(Context)
+  console.log(userData)
   handleLogout = async() => {
     try {
       await AsyncStorage.clear();
@@ -29,10 +30,10 @@ const AccountContent = () => {
     </View>
     <Text style={{fontSize: 15,marginBottom: 5}}>Manage your saved addresses</Text>
     <Divider orientation='horizontal' width={2}/>
-    <View style={styles.headingContainer}>
+    <TouchableOpacity onPress={() => navigation.navigate('Invite')} style={styles.headingContainer}>
       <Text style={styles.heading}>Invite friends </Text>
       <Icon name='person-add-alt' type='material' color='black' size={30}/>
-    </View>
+    </TouchableOpacity>
     <Text style={{fontSize: 15,marginBottom: 5}}>invite friends and get discounts</Text>
     <Divider orientation='horizontal' width={2}/>
     <View style={styles.headingContainer}>
@@ -41,10 +42,10 @@ const AccountContent = () => {
     </View>
     <Text style={{fontSize: 15,marginBottom: 5}}>Frequently asked questions</Text>
     <Divider orientation='horizontal' width={2}/>
-    <View style={styles.headingContainer}>
+    <TouchableOpacity onPress={() => navigation.navigate('AccountSettings', { userData: userData })} style={styles.headingContainer}>
       <Text style={styles.heading}>Account settings </Text>
       <Icon name='settings' type='feather' color='black' size={30}/>
-    </View>
+    </TouchableOpacity>
     <Text style={{fontSize: 15,marginBottom: 5}}>Manage your account</Text>
     <Divider orientation='horizontal' width={2}/>
 
