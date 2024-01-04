@@ -18,7 +18,7 @@ const FindAVet = ({ navigation }) => {
 
     fetchData();
   }, []);
-
+ console.log ("VetData",vetData)
 
 
 
@@ -29,7 +29,7 @@ const FindAVet = ({ navigation }) => {
         data={vetData}
         keyExtractor={(item) => item.id}
         renderItem={({ item , index }) => (
-        <Pressable onPress={() => navigation.navigate("VetDescription", { item })}>
+        <Pressable onPress={() => navigation.navigate("VetDescription", { item , purpose: "treatment" })}>
           <VetCard   image={item.imageurl} name={item.name} rating={item.rating} phone={item.phone} location={item.location} Latitude={item.latitude} Longitude={item.longitude}  adress={item.adress}/>
         </Pressable>
         )}

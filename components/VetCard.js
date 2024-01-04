@@ -37,7 +37,7 @@ const VetCard = ({ image, name, rating, phone, location, Latitude, Longitude }) 
   return (
     <View style={styles.productCard}>
       <View style={styles.imagecard}>
-        <Image source={image} style={styles.productImage} />
+        <Image source={{uri:image}} style={styles.productImage} />
       </View>
       <View style={styles.productDetails}>
         <Text style={styles.productName}>{name}</Text>

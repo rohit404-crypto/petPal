@@ -15,12 +15,15 @@ import VetDescriptionContent from "../components/VetDescriptionContent";
 
 const VetDescriptionScreen = ({route}) => {
   const images = [1, 2, 3, 4];
-  const {item} = route.params;
+  // console.log("route.params", route.params);
 
+  const {item , purpose} = route.params;
+  console.log("purpose",purpose)
+ 
   return (
     <ScrollView style={{ flex: 1 }}>
      <VetHeader/>
-     <VetDescriptionContent images={images} item={item} />
+     <VetDescriptionContent images={images} item={item} purpose={purpose} />
     </ScrollView>
   );
 };

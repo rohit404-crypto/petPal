@@ -23,6 +23,7 @@ import AdoptPage from './screens/AdoptPage';
 import AdoptDescription from './screens/AdoptDescription';
 import AccountSettings from './screens/AccountSettings';
 import InviteFriends from './screens/InviteFriends';
+import Welcome from './screens/Welcome';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -82,9 +83,10 @@ const AccountStack = ()=>(
 
 const AuthNavigator = () => (
   <Stack.Navigator initialRouteName="splash">
-    <Stack.Screen name="login" component={Login} />
-    <Stack.Screen name="signup"   component={Signup} />
-    <Stack.Screen name="splash" options={{ headerShown: false }} component={Splash} />
+    <Stack.Screen name="login" options={{headerShown:false}} component={Login} />
+    <Stack.Screen name="signup" options={{headerShown:false}}  component={Signup} />
+    <Stack.Screen name="Welcome" options={{ headerShown: false }} component={Welcome} />
+    <Stack.Screen name='splash' options={{headerShown:false}} component={Splash} />
   </Stack.Navigator>
 );
 
@@ -152,7 +154,7 @@ export default function App() {
  console.log(isSignedIn)
   return (
     <Context.Provider value={[isSignedIn, setisSignedIn]}>
-      <NavigationContainer>
+      <NavigationContainer >
         {isSignedIn ? <AppNavigator /> : <AuthNavigator />}
       </NavigationContainer>
     </Context.Provider>
